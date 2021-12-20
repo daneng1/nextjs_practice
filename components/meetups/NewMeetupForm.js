@@ -11,6 +11,7 @@ function NewMeetupForm(props) {
 
   function submitHandler(event) {
     event.preventDefault();
+    console.log("Title",enteredTitle);
 
     const enteredTitle = titleInputRef.current.value;
     const enteredImage = imageInputRef.current.value;
@@ -47,7 +48,7 @@ function NewMeetupForm(props) {
           <textarea
             id='description'
             required
-            rows='5'
+            rows='10'
             ref={descriptionInputRef}
           ></textarea>
         </div>

@@ -1,14 +1,27 @@
-import { useRouter } from 'next/router';
+import { deleteHandler } from '../../pages/api/delete-meetup'
+import { useRouter } from "next/router";
 
-import Card from '../ui/Card';
-import classes from './MeetupItem.module.css';
+import Card from "../ui/Card";
+import classes from "./MeetupItem.module.css";
 
 function MeetupItem(props) {
-    const router = useRouter();
+  const router = useRouter();
 
-    function showDetailsHandler() {
-        router.push(`/${props.id}`)
+  function showDetailsHandler() {
+    router.push(`/${props.id}`);
+  }
+
+  function deleteEventHandler() {
+    let response = {
+      method: "DELETE",
+      body: props.id,
+      headers: {
+        'Content-Type':'application/json'
+      }
     }
+    deleteHandler(response);
+  }
+
   return (
     <li className={classes.item}>
       <Card>
@@ -21,6 +34,7 @@ function MeetupItem(props) {
         </div>
         <div className={classes.actions}>
           <button onClick={showDetailsHandler}>Show Details</button>
+          <button onClick={deleteEventHandler}>Delete Event</button>
         </div>
       </Card>
     </li>
